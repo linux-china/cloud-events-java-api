@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.net.URI;
+import java.util.Date;
 
 /**
  * cloud event test
@@ -30,6 +31,7 @@ public class CloudEventTest {
         String email = "linux_china@hotmail.com";
         CloudEvent<String> loginEvent = new CloudEvent<String>("text/plain", email);
         loginEvent.setSchemaURL(new URI("mailto:" + email));
+        loginEvent.setEventTime(new Date());
         String jsonText = objectMapper.writeValueAsString(loginEvent);
         System.out.println(jsonText);
         CloudEvent cloudEvent = objectMapper.readValue(jsonText, new TypeReference<CloudEvent<String>>() {
@@ -43,4 +45,12 @@ public class CloudEventTest {
         CloudEvent<String> loginEvent = CloudEventBuilder.<String>newInstance().contentType("text/plain").data("linux_china@hotmail.com").build();
         System.out.println(objectMapper.writeValueAsString(loginEvent));
     }
+
+    @Test
+    public void parseJsonFile() throws Exception {
+        CloudEvent cloudEvent = objectMapper.readValue(this.getClass().getResourceAsStream("/cloud-event-demo.json"), new TypeReference<CloudEvent<String>>() {
+        });
+        System.out.println(cloudEvent.getEventTime());
+    }
 }
+
