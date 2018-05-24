@@ -1,6 +1,7 @@
 package org.mvnsearch.cloud.events;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.util.UUID;
  *
  * @author linux_china
  */
+@JsonIgnoreProperties(value = { "$schema" })
 public class CloudEvent<T> {
     /**
      * cloud events version
