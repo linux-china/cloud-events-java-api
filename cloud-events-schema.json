@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "title": "CloudEvents JSON Event Format",
+  "description": "JSON Event Format for CloudEvents",
+  "type": "object",
+  "properties": {
+    "cloudEventsVersion": {
+      "description": "The version of the CloudEvents specification",
+      "type": "string"
+    },
+    "eventType": {
+      "description": "Type of occurrence which has happened. Often this property is used for routing, observability, policy enforcement, etc.",
+      "type": "string"
+    },
+    "eventTypeVersion": {
+      "description": "The version of the eventType. This enables the interpretation of data by eventual consumers, requires the consumer to be knowledgeable about the producer.",
+      "type": "string"
+    },
+    "source": {
+      "description": "This describes the event producer. Often this will include information such as the type of the event source, the organization publishing the event, and some unique idenfitiers. The exact syntax and semantics behind the data encoded in the URI is event producer defined.",
+      "type": "string"
+    },
+    "eventID": {
+      "description": "ID of the event. The semantics of this string are explicitly undefined to ease the implementation of producers. Unique within the scope of the producer, Enable duplications between different producers.",
+      "type": "string"
+    },
+    "eventTime": {
+      "description": "Timestamp of when the event happened",
+      "type": "string"
+    },
+    "schemaURL": {
+      "description": "A link to the schema that the data attribute adheres to.",
+      "type": "string"
+    },
+    "contentType": {
+      "description": "Describe the data encoding format",
+      "type": "string"
+    },
+    "extensions": {
+      "description": "This is for additional metadata and this does not have a mandated structure. This enables a place for custom fields a producer or middleware might want to include and provides a place to test metadata before adding them to the CloudEvents specification",
+      "type": "object"
+    },
+    "data": {
+      "description": "The event payload. The payload depends on the eventType, schemaURL and eventTypeVersion, the payload is encoded into a media format which is specified by the contentType attribute (e.g. application/json).",
+      "type": "object"
+    }
+  },
+  "required": [
+    "cloudEventsVersion",
+    "eventType",
+    "source",
+    "eventID"
+  ]
+}
