@@ -8,6 +8,7 @@ Java API for CloudEvents(https://github.com/cloudevents/spec)
 * Standard Java Bean for cloud events
 * Builder Pattern to build events
 * Json support by Jackson adapter
+* CloudEvents JSON Schema: https://github.com/linux-china/cloud-events-java-api/blob/master/cloud-events-schema.json
 
 # How to use
 
