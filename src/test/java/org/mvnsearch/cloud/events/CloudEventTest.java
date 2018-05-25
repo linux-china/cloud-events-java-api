@@ -5,10 +5,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.net.URI;
+import java.util.Base64;
 import java.util.Date;
 
 /**
@@ -29,7 +31,7 @@ public class CloudEventTest {
     @Test
     public void testJsonEvent() throws Exception {
         String email = "linux_china@hotmail.com";
-        CloudEvent<String> loginEvent = new CloudEvent<String>("text/plain", email);
+        CloudEvent<String> loginEvent = new CloudEvent<>("text/plain", email);
         loginEvent.setSchemaURL(new URI("mailto:" + email));
         loginEvent.setEventTime(new Date());
         String jsonText = objectMapper.writeValueAsString(loginEvent);
@@ -51,6 +53,15 @@ public class CloudEventTest {
         CloudEvent cloudEvent = objectMapper.readValue(this.getClass().getResourceAsStream("/cloud-event-demo.json"), new TypeReference<CloudEvent<String>>() {
         });
         System.out.println(cloudEvent.getEventTime());
+    }
+
+    @Test
+    public void testBinaryData() throws Exception {
+        byte[] data = "good".getBytes();
+        CloudEvent<byte[]> loginEvent = new CloudEvent<>("application/binary", data);
+        String jsonText = objectMapper.writeValueAsString(loginEvent);
+        String base64Text = Base64.getEncoder().encodeToString(data);
+        Assert.assertTrue(jsonText.contains(base64Text));
     }
 }
 
