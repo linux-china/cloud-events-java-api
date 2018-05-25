@@ -58,10 +58,13 @@ public class CloudEventTest {
     @Test
     public void testBinaryData() throws Exception {
         byte[] data = "good".getBytes();
-        CloudEvent<byte[]> loginEvent = new CloudEvent<>("application/binary", data);
-        String jsonText = objectMapper.writeValueAsString(loginEvent);
+        CloudEvent<byte[]> event1 = new CloudEvent<>("application/binary", data);
+        String jsonText = objectMapper.writeValueAsString(event1);
         String base64Text = Base64.getEncoder().encodeToString(data);
         Assert.assertTrue(jsonText.contains(base64Text));
+        CloudEvent<byte[]> event2 = objectMapper.readValue(jsonText, new TypeReference<CloudEvent<byte[]>>() {
+        });
+        Assert.assertArrayEquals(data, event2.getData());
     }
 }
 
