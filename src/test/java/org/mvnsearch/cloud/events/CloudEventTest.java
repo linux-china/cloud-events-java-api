@@ -58,7 +58,7 @@ public class CloudEventTest {
     @Test
     public void testBinaryData() throws Exception {
         byte[] data = "good".getBytes();
-        CloudEvent<byte[]> event1 = new CloudEvent<>("application/binary", data);
+        CloudEvent<byte[]> event1 = new CloudEvent<>("application/octet-stream", data);
         String jsonText = objectMapper.writeValueAsString(event1);
         String base64Text = Base64.getEncoder().encodeToString(data);
         Assert.assertTrue(jsonText.contains(base64Text));
