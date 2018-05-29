@@ -25,5 +25,8 @@ public class CloudEventProtoTest {
         CloudEventProtos.CloudEventProto event2 = CloudEventProtos.CloudEventProto.parseFrom(output.toByteArray());
         Assert.assertEquals(event2.getContentType(), "text/plain");
         Assert.assertEquals(event2.getExtensionsMap().get("name"), "linux_china");
+        CloudEvent javaEvent = CloudEventMapper.protoToJavaBean(event2);
+        Assert.assertEquals(javaEvent.getContentType(), "text/plain");
+        Assert.assertEquals(javaEvent.getExtension("name"), "linux_china");
     }
 }
