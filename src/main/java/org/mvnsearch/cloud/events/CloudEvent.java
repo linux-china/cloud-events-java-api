@@ -16,7 +16,7 @@ import java.util.UUID;
  *
  * @author linux_china
  */
-@JsonIgnoreProperties(value = { "$schema" })
+@JsonIgnoreProperties(value = {"$schema"})
 public class CloudEvent<T> {
     /**
      * cloud events version
@@ -181,5 +181,21 @@ public class CloudEvent<T> {
             extensions = new HashMap<String, String>();
         }
         this.extensions.put(name, value);
+    }
+
+    @Override
+    public String toString() {
+        return "CloudEvent{" +
+                "cloudEventsVersion='" + cloudEventsVersion + '\'' +
+                ", eventID='" + eventID + '\'' +
+                ", eventType='" + eventType + '\'' +
+                ", eventTypeVersion='" + eventTypeVersion + '\'' +
+                ", extensions=" + extensions +
+                ", source=" + source +
+                ", contentType='" + contentType + '\'' +
+                ", data=" + data +
+                ", schemaURL=" + schemaURL +
+                ", eventTime=" + eventTime +
+                '}';
     }
 }
