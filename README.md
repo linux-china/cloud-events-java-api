@@ -56,6 +56,18 @@ objectMapper.writeValueAsString(loginEvent);
 objectMapper.readValue(jsonText, new TypeReference<CloudEvent<String>>() {});
 ```
 
+# Protocol Buffer
+
+Please refer CloudEventMapper for converter between JavaBean and ProtoMessage.
+
+# Event Logging
+
+CloudEvent ships with default toString pattern: CloudEvent{cloudEventsVersion='0.1',eventID='xxx'}
+
+```
+12:49:22,076 |-INFO in ch.qos.logback.classic.LoggerContext[default] - CloudEvent{cloudEventsVersion='0.1',eventID='xxx'}
+```
+
 # Event Broker
 
 Please consider NATS or NATS Streaming to post or subscribe cloud events.
