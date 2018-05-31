@@ -4,8 +4,6 @@ package org.mvnsearch.cloud.events;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-
 /**
  * cloud event proto test
  *
@@ -20,9 +18,7 @@ public class CloudEventProtoTest {
                 .putExtensions("name", "linux_china")
                 .setEventTime(System.currentTimeMillis())
                 .build();
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        event.writeTo(output);
-        CloudEventProtos.CloudEventProto event2 = CloudEventProtos.CloudEventProto.parseFrom(output.toByteArray());
+        CloudEventProtos.CloudEventProto event2 = CloudEventProtos.CloudEventProto.parseFrom(event.toByteArray());
         Assert.assertEquals(event2.getContentType(), "text/plain");
         Assert.assertEquals(event2.getExtensionsMap().get("name"), "linux_china");
         CloudEvent javaEvent = CloudEventMapper.protoToJavaBean(event2);
