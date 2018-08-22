@@ -80,6 +80,16 @@ public class CloudEventBuilder<T> {
         return this;
     }
 
+    public CloudEventBuilder<T> traceParent(String traceParent) {
+        cloudEvent.setExtension("traceparent", traceParent);
+        return this;
+    }
+
+    public CloudEventBuilder<T> traceState(String traceState) {
+        cloudEvent.setExtension("tracestate", traceState);
+        return this;
+    }
+
     public CloudEventBuilder<T> cloudEventsVersion(String cloudEventsVersion) {
         cloudEvent.setCloudEventsVersion(cloudEventsVersion);
         return this;
