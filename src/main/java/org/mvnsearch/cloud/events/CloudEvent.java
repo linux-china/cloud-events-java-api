@@ -178,9 +178,25 @@ public class CloudEvent<T> {
 
     public void setExtension(String name, String value) {
         if (extensions == null) {
-            extensions = new HashMap<String, String>();
+            extensions = new HashMap<>();
         }
         this.extensions.put(name, value);
+    }
+
+    public void setTraceParent(String traceParent) {
+        setExtension("traceparent", traceParent);
+    }
+
+    public String getTraceParent() {
+        return (String) getExtension("traceparent");
+    }
+
+    public void setTraceState(String traceState) {
+        setExtension("tracestate", traceState);
+    }
+
+    public String getTraceState() {
+        return (String) getExtension("tracestate");
     }
 
     @Override
